@@ -1,15 +1,15 @@
-name: Build huggingface Image
+name: Build render Image
 
 on:
   push:
-    branches: [ huggingface ]
+    branches: [ render ]
     paths:
       - 'Dockerfile'
       - 'app.js'
       - 'package.json'
       - 'index.html'
   pull_request:
-    branches: [ huggingface ]
+    branches: [ render ]
   workflow_dispatch:
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: huggingface  
+          ref: render  
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -41,7 +41,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/hug:latest
+            ghcr.io/${{ github.repository_owner }}/ren:latest
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.description=http server
